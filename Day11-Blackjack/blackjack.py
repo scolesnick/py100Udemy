@@ -21,6 +21,12 @@ cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 def dealCard(playerHand):
     playerHand.append(rand.choice(cards))
 
+# check for 11 (ace) in hand and replace with 1 if over 21
+def replaceAce(playerHand):
+    if sum(playerHand) > 21 and 11 in playerHand:
+        idx = playerHand.index(11) 
+        playerHand[idx] = 1
+
 def playGame():
     # Using a dictionary to store dealer and user cards
     hands = {'d': [], 'p1': []}
@@ -40,6 +46,7 @@ def playGame():
     playerBust = False
     while hit.lower() == 'hit' and playerBust == False:
         dealCard(hands['p1'])
+        replaceAce(hands['p1'])
         if sum(hands['p1']) > 21:
             playerBust = True
             print(f"You drew {hands['p1'][-1]} and bust at {sum(hands['p1'])}")
@@ -51,6 +58,7 @@ def playGame():
     end = sum(hands['d']) == 21 or sum(hands['d']) > sum(hands['p1']) 
     while not end and not playerBust:
         dealCard(hands['d'])
+        replaceAce(hands['d'])
         end = sum(hands['d']) >= 21 or sum(hands['d']) > sum(hands['p1'])
 
     # Show final hands
