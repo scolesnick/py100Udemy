@@ -7,9 +7,10 @@ import game_data as gd
 import os
 import random as rand
 
-def getPair():
-    listData = rand.shuffle(gd.data)
-    a = listData.pop(0)
+def getList():
+    returnThis = gd.data
+    rand.shuffle(returnThis)
+    return returnThis
 
 
 again = True
@@ -17,11 +18,11 @@ again = True
 while again:
     correct = True
     score = 0
-    listData = rand.shuffle(gd.data)
+    listData = getList()
     a = listData.pop(0)
     while correct:
         if listData == 0:
-            listData = rand.shuffle(gd.data)
+            listData = getList() 
             if listData[0] == a:
                 listData.pop(0)
         b = listData.pop(0)
@@ -29,7 +30,7 @@ while again:
         print(art.logo)
         # If scored correct print score
         if score > 0:
-            print(f"You're right! Current score: {score}")
+            print(f"You're right! Current score: {score}.")
         print(f"Compare A: {a['name']}, a {a['description']}, from {a['country']}.")
         print(art.vs)
         print(f"Compare B: {b['name']}, a {b['description']}, from {b['country']}.")
@@ -48,10 +49,11 @@ while again:
             score += 1
             a = b
         else:
-            correct = False:
+            correct = False
         
         # Clear screen
         os.system('cls')
     print(art.logo)
     print(f"Sorry, that's wrong. Final score: {score}")
-)
+    again = input("Play again? Type 'y' or 'n': ") == 'y'
+    os.system('cls')
