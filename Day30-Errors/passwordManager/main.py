@@ -59,6 +59,30 @@ def save():
             web_entry.delete(0,tk.END)
             pass_entry.delete(0, tk.END)
 
+
+# ---------------------------- LOOKUP INFO ------------------------------- #
+def find_password():
+    web = web_entry.get()
+    header = ''
+    text = ''
+    try:
+        with open(file='data.json',mode='r') as file:
+            data = json.load(file)
+        entry = data[web]
+    except FileNotFoundError:
+        header = 'Error'
+        text = 'No Data File Found'
+    except KeyError:
+        header = 'Error'
+        text = 'No details for the website exists'
+    else:
+        usr = entry['email']
+        psw = entry['password']
+        text = f'Email: {usr}\nPassword: {psw}'
+        header = web
+    finally:
+        messagebox.showinfo(title=header, message=text)
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = tk.Tk()
 window.title('Password Manager')
@@ -76,7 +100,7 @@ web_label = tk.Label(text='Website', )
 web_label.grid(column=0,row=1, sticky=tk.E)
 
 # Website Entry
-web_entry = tk.Entry(width=35)
+web_entry = tk.Entry(width=32)
 web_entry.grid(column=1,row=1, columnspan=2, sticky=tk.W)
 web_entry.focus()
 
@@ -85,7 +109,7 @@ name_label = tk.Label(text='Email/Username')
 name_label.grid(column=0,row=2, sticky=tk.E)
 
 # Email/Username Entry
-name_entry = tk.Entry(width=35)
+name_entry = tk.Entry(width=36)
 name_entry.grid(column=1,row=2, columnspan=2, sticky=tk.W)
 name_entry.insert(tk.END, 'hello world')
 
@@ -94,7 +118,7 @@ pass_label = tk.Label(text='Password')
 pass_label.grid(column=0,row=3, sticky=tk.E)
 
 # Password Entry
-pass_entry = tk.Entry(width=21)
+pass_entry = tk.Entry(width=32)
 pass_entry.grid(column=1,row=3, sticky=tk.W)
 
 # Generate Pass Button
@@ -104,5 +128,9 @@ pass_button.grid(column=2,row=3, sticky=tk.W)
 # Add Button
 add_button = tk.Button(text='Add', width=36, command=save)
 add_button.grid(column=1,row=4,columnspan=2, sticky=tk.W)
+
+# Search Button
+search_button = tk.Button(text='Search', command=find_password, width=14)
+search_button.grid(column=2,row=1,sticky=tk.W)
 
 window.mainloop()
