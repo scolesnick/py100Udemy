@@ -19,10 +19,13 @@ class QuizBrain:
         # user_answer = input(f"Q.{self.question_number}: {q_text} (True/False): ")
         # self.check_answer(user_answer)
 
-    def check_answer(self, user_answer: str):
+    def check_answer(self, user_answer):
         correct_answer = self.current_question.answer
         if user_answer.lower() == correct_answer.lower():
             self.score += 1
-            return True
+            print("You got it right!")
         else:
-            return False
+            print("That's wrong.")
+
+        print(f"Your current score is: {self.score}/{self.question_number}")
+        print("\n")
