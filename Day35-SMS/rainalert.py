@@ -7,6 +7,7 @@ MY_LONG = -81.655647
 # MY_LONG = -91.881752
 APP_ID = ''
 
+
 params = {
     'lat': MY_LAT,
     'lon': MY_LONG,
@@ -28,4 +29,7 @@ for e in data['list']:
     if e['weather'][0]['id'] < 700:
         rain = True
         break
-print(f'It will rain: {rain}')
+
+if rain:
+    # Insert code for twillio to send messages to phone
+    pass
