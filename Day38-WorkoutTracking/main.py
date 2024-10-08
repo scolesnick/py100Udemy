@@ -6,6 +6,11 @@ APP_ID = sys.argv[1]
 API_KEY = sys.argv[2]
 HOST = 'https://trackapi.nutritionix.com'
 SHEETY_URL = sys.argv[3]
+SHEETY_KEY = sys.argv[4]
+
+sheety_header = {
+    'Authorization':f'Bearer {SHEETY_KEY}'
+}
 
 headers = {
     'x-app-id':APP_ID,
@@ -44,5 +49,5 @@ for i in range(len(names)):
             'calories':cals[i]
         }
     }
-    response_sheety = requests.post(url=SHEETY_URL, json=entry)
+    response_sheety = requests.post(url=SHEETY_URL, json=entry, headers=sheety_header)
     print(response_sheety.text)
