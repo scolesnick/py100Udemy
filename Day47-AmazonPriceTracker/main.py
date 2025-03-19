@@ -7,7 +7,7 @@ import smtplib
 
 
 load_dotenv() # Load testing env variables from .env file - referenced by os
-URL = "https://appbrewery.github.io/instant_pot/"
+URL = "https://www.amazon.com/dp/B075CYMYK6?ref_=cm_sw_r_cp_ud_ct_FM9M699VKHTT47YD50Q6&th=1"
 HEADERS = {
     "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
     "Accept-Language":"en-US"
